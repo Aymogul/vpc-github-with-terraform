@@ -6,8 +6,8 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "mybucket"
-    key    = "ay-terraform-remote-backend-s3"
+    bucket = "ay-terraform-remote-backend-s3"
+    key    = "path/to/my/key"
     region = "us-east-1"
   }
 }

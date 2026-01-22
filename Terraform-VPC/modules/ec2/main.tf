@@ -1,19 +1,15 @@
 resource "aws_instance" "ec2_instance" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
-  count = length(var.ec2_names)
-  subnet_id     = element(var.subnet_ids, count.index)   
-  vpc_security_group_ids = [var.security_group_id]
+   count = length(var.ec2_names)
+  ami           = data.aws_ami.amazon-2.id
+  instance_type = "t2.micro"
   associate_public_ip_address = true
+  vpc_security_group_ids = [var.sg_id]
+  subnet_id = var.subnets[count.index]
+  availability_zone = data.aws_availability_zones.available.names[count.index]
   user_data = templatefile("${path.module}/user_data.sh.tpl", {
   instance_name = var.ec2_names[count.index]
-  LOG_FILE      = "/var/log/user-data.log"
-  environment   = var.environment   
+  LOG_FILE      = "/var/log/user-data.log"  
 })
-
-
-  
-
   tags = {
     Name = var.ec2_names[count.index]
   }

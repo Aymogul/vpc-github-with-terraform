@@ -12,6 +12,10 @@ module "ec2" {
   source            = "./modules/ec2"
   ami_id            = "ami-07ff62358b87c7116" # Example AMI ID
   instance_type     = "t2.micro"
-  subnet_id         = element(module.vpc.subnet_ids, 0)
+  subnet_ids = module.vpc.subnet_ids
   security_group_id = module.sg.sg_id
+  ec2_names         = ["WebServer1", "WebServer2"]
+  availability_zones = data.aws_availability_zones.available.names 
+  environment       = "dev"
 }
+data "aws_availability_zones" "available" {}

@@ -20,6 +20,14 @@ variable "ec2_names" {
   default     = ["EC2_Instance_1", "EC2_Instance_2"]
   
 }
-variable "" {
-  
+variable "availability_zones" {
+  description = "List of availability zones"
+  type        = list(string)
 }
+
+variable "environment" {
+  description = "Deployment environment"
+  type        = string
+}
+
+

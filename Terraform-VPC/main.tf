@@ -9,7 +9,7 @@ module "sg" {
 }
 
 module "ec2" {
-  source            = "./modules/ec2"
-  sg_id             = module.sg.sg_id
-  subnets           = module.vpc.public_subnet_ids
+  source  = "./modules/ec2"
+  sg_id   = module.sg.sg_id
+  subnets = module.vpc.subnet_ids
 }
